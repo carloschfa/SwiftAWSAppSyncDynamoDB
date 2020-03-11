@@ -3,7 +3,8 @@ DemoDatabase
 
 ## AWS AppSync Schema:
 
-```type Mutation {
+```
+type Mutation {
 	insertObject(
 		objectId: String!,
 		category: String!,
