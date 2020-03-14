@@ -164,8 +164,7 @@ class TestView: UIViewController {
 	func updateObject(_ object: [String: Any]) {
     
     guard
-      let objectId = object["objectId"] as? String,
-      let index = objectIds.firstIndex(of: objectId)
+      let objectId = object["objectId"] as? String
       else { return }
     
     var object = object
@@ -190,10 +189,6 @@ class TestView: UIViewController {
           guard
             let updateObject = graphQLResult.data?.updateObject,
             updateObject.success else { return }
-          self.objects[objectId] = object
-          DispatchQueue.main.async {
-            self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
-          }
           NSLog(updateObject.message)
         default:
           NSLog("Data couldn't not be updated.")
