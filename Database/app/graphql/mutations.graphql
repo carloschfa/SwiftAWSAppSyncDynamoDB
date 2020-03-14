@@ -1,0 +1,45 @@
+# this is an auto generated file. This will be overwritten
+mutation DeleteObject($objectId: String!) {
+  deleteObject(objectId: $objectId) {
+    message
+    success
+  }
+}
+mutation InsertObject(
+  $boolean: Boolean!
+  $category: String!
+  $createdAt: String!
+  $number: Int!
+  $objectId: String!
+  $text: String!
+) {
+  insertObject(
+    boolean: $boolean
+    category: $category
+    createdAt: $createdAt
+    number: $number
+    objectId: $objectId
+    text: $text
+  ) {
+    message
+    success
+  }
+}
+mutation UpdateObject(
+  $boolean: Boolean!
+  $number: Int!
+  $objectId: String!
+  $text: String!
+  $updatedAt: String!
+) {
+  updateObject(
+    boolean: $boolean
+    number: $number
+    objectId: $objectId
+    text: $text
+    updatedAt: $updatedAt
+  ) {
+    message
+    success
+  }
+}

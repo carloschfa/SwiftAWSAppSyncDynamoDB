@@ -1,0 +1,35 @@
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type Mutation {
+  deleteObject(objectId: String!): MutationResponse!
+  insertObject(boolean: Boolean!, category: String!, createdAt: String!, number: Int!, objectId: String!, text: String!): MutationResponse!
+  updateObject(boolean: Boolean!, number: Int!, objectId: String!, text: String!, updatedAt: String!): MutationResponse!
+}
+
+type MutationResponse {
+  message: String!
+  success: Boolean!
+}
+
+type Object {
+  boolean: Boolean!
+  category: String!
+  createdAt: String!
+  number: Int!
+  objectId: String!
+  text: String!
+  updatedAt: String
+}
+
+type Query {
+  objects: [Object]!
+  objectsByCategories(category: [String]): [Object]
+}
+
+type Subscription {
+  objectsSubscription: MutationResponse @aws_subscribe(mutations : ["insertObject", "updateObject", "deleteObject"])
+}

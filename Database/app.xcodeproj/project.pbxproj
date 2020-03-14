@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		291F172F1DCCF60E004CA70F /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 297DBA0A1DCB5F13008551F2 /* PushKit.framework */; };
-		2950182F1D9A5CE000AFD8B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2950182E1D9A5CE000AFD8B3 /* GoogleService-Info.plist */; };
 		29D29EF91D9A59E4006CA074 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D29EF81D9A59E4006CA074 /* AppDelegate.swift */; };
 		29D29F011D9A59E4006CA074 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29D29F001D9A59E4006CA074 /* Assets.xcassets */; };
 		29D29F041D9A59E4006CA074 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29D29F021D9A59E4006CA074 /* LaunchScreen.storyboard */; };
@@ -16,13 +15,19 @@
 		29EF508C23F2B2E300CB7381 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EF508A23F2B2E300CB7381 /* FilterView.swift */; };
 		29F0B02B23BFF19F0016709B /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F0B02923BFF19F0016709B /* TestView.swift */; };
 		29F0B02C23BFF19F0016709B /* TestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F0B02A23BFF19F0016709B /* TestView.xib */; };
+		46F02DA72417F56800E53097 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 46F02DA62417F56800E53097 /* awsconfiguration.json */; };
+		46F02DA92417F85F00E53097 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 46F02DA82417F85F00E53097 /* schema.json */; };
+		46F02DAB2417F92400E53097 /* schema.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 46F02DAA2417F92400E53097 /* schema.graphql */; };
+		46F02DAD2417F98100E53097 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F02DAC2417F98000E53097 /* API.swift */; };
+		46F02DB32419842500E53097 /* subscriptions.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 46F02DB02419842500E53097 /* subscriptions.graphql */; };
+		46F02DB42419842500E53097 /* queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 46F02DB12419842500E53097 /* queries.graphql */; };
+		46F02DB52419842500E53097 /* mutations.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 46F02DB22419842500E53097 /* mutations.graphql */; };
 		6C0888E250EDDE30BCA104EB /* Pods_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A8835041C05399266378E9 /* Pods_app.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		14A8835041C05399266378E9 /* Pods_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		295015181D9A5C1B00AFD8B3 /* app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = app.entitlements; sourceTree = "<group>"; };
-		2950182E1D9A5CE000AFD8B3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		297DBA0A1DCB5F13008551F2 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
 		29D29EF11D9A59E4006CA074 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29D29EF81D9A59E4006CA074 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -33,6 +38,13 @@
 		29EF508A23F2B2E300CB7381 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		29F0B02923BFF19F0016709B /* TestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		29F0B02A23BFF19F0016709B /* TestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestView.xib; sourceTree = "<group>"; };
+		46F02DA62417F56800E53097 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		46F02DA82417F85F00E53097 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		46F02DAA2417F92400E53097 /* schema.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema.graphql; sourceTree = "<group>"; };
+		46F02DAC2417F98000E53097 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		46F02DB02419842500E53097 /* subscriptions.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = subscriptions.graphql; sourceTree = "<group>"; };
+		46F02DB12419842500E53097 /* queries.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = queries.graphql; sourceTree = "<group>"; };
+		46F02DB22419842500E53097 /* mutations.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mutations.graphql; sourceTree = "<group>"; };
 		7393A6F3A4D6270AF7ACDCFA /* Pods-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.release.xcconfig"; path = "Pods/Target Support Files/Pods-app/Pods-app.release.xcconfig"; sourceTree = "<group>"; };
 		DED94DC0AC66CCD8277DB3AF /* app-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "app-Prefix.pch"; sourceTree = "<group>"; };
 		FC28F63C1114893726170446 /* Pods-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.debug.xcconfig"; path = "Pods/Target Support Files/Pods-app/Pods-app.debug.xcconfig"; sourceTree = "<group>"; };
@@ -85,15 +97,38 @@
 		29D29EF31D9A59E4006CA074 /* app */ = {
 			isa = PBXGroup;
 			children = (
+				46F02DAE2419841100E53097 /* Resources */,
+				46F02DAC2417F98000E53097 /* API.swift */,
 				295015181D9A5C1B00AFD8B3 /* app.entitlements */,
 				29D29EF81D9A59E4006CA074 /* AppDelegate.swift */,
 				29D29F001D9A59E4006CA074 /* Assets.xcassets */,
-				2950182E1D9A5CE000AFD8B3 /* GoogleService-Info.plist */,
 				29D29F021D9A59E4006CA074 /* LaunchScreen.storyboard */,
 				29D29F051D9A59E4006CA074 /* Info.plist */,
 			);
 			path = app;
 			sourceTree = "<group>";
+		};
+		46F02DAE2419841100E53097 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				46F02DAF2419842500E53097 /* graphql */,
+				46F02DA62417F56800E53097 /* awsconfiguration.json */,
+				46F02DA82417F85F00E53097 /* schema.json */,
+				46F02DAA2417F92400E53097 /* schema.graphql */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		46F02DAF2419842500E53097 /* graphql */ = {
+			isa = PBXGroup;
+			children = (
+				46F02DB02419842500E53097 /* subscriptions.graphql */,
+				46F02DB12419842500E53097 /* queries.graphql */,
+				46F02DB22419842500E53097 /* mutations.graphql */,
+			);
+			name = graphql;
+			path = app/graphql;
+			sourceTree = SOURCE_ROOT;
 		};
 		7B8B1B7262BA6687D240D5CB /* Pods */ = {
 			isa = PBXGroup;
@@ -186,11 +221,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46F02DA92417F85F00E53097 /* schema.json in Resources */,
 				29EF508B23F2B2E300CB7381 /* FilterView.xib in Resources */,
+				46F02DB32419842500E53097 /* subscriptions.graphql in Resources */,
 				29F0B02C23BFF19F0016709B /* TestView.xib in Resources */,
+				46F02DB52419842500E53097 /* mutations.graphql in Resources */,
+				46F02DB42419842500E53097 /* queries.graphql in Resources */,
+				46F02DA72417F56800E53097 /* awsconfiguration.json in Resources */,
+				46F02DAB2417F92400E53097 /* schema.graphql in Resources */,
 				29D29F041D9A59E4006CA074 /* LaunchScreen.storyboard in Resources */,
 				29D29F011D9A59E4006CA074 /* Assets.xcassets in Resources */,
-				2950182F1D9A5CE000AFD8B3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,23 +244,17 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-app/Pods-app-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/abseil/absl.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSAppSync/AWSAppSync.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/absl.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAppSync.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -254,6 +288,7 @@
 			files = (
 				29F0B02B23BFF19F0016709B /* TestView.swift in Sources */,
 				29EF508C23F2B2E300CB7381 /* FilterView.swift in Sources */,
+				46F02DAD2417F98100E53097 /* API.swift in Sources */,
 				29D29EF91D9A59E4006CA074 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

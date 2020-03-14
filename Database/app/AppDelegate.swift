@@ -10,7 +10,9 @@
 // THE SOFTWARE.
 
 import UIKit
-import Firebase
+import AWSAppSync
+
+var appSyncClient: AWSAppSyncClient!
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @UIApplicationMain
@@ -18,16 +20,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 	var testView: TestView!
-
+  
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
 
-		//-----------------------------------------------------------------------------------------------------------------------------------------
-		// Firebase initialization
-		//-----------------------------------------------------------------------------------------------------------------------------------------
-		FirebaseApp.configure()
-		Firestore.firestore().settings.isPersistenceEnabled = false
-		FirebaseConfiguration().setLoggerLevel(.error)
+	do {
+        let cacheConfiguration = try AWSAppSyncCacheConfiguration()
+        let appSyncConfig = try AWSAppSyncClientConfiguration(appSyncServiceConfig: AWSAppSyncServiceConfig(),
+                                                              cacheConfiguration: cacheConfiguration)
+        appSyncClient = try AWSAppSyncClient(appSyncConfig: appSyncConfig)
+        appSyncClient?.apolloClient?.cacheKeyForObject = { $0["objectId"] }
+      
+    } catch {
+        print("Error initializing AppSync client. \(error)")
+    }
 
 		//-----------------------------------------------------------------------------------------------------------------------------------------
 		// UI initialization

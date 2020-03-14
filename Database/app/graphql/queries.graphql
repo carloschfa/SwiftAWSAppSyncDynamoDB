@@ -1,0 +1,23 @@
+# this is an auto generated file. This will be overwritten
+query Objects {
+  objects {
+    boolean
+    category
+    createdAt
+    number
+    objectId
+    text
+    updatedAt
+  }
+}
+query ObjectsByCategories($category: [String]) {
+  objectsByCategories(category: $category) {
+    boolean
+    category
+    createdAt
+    number
+    objectId
+    text
+    updatedAt
+  }
+}

@@ -10,14 +10,14 @@
 // THE SOFTWARE.
 
 import UIKit
-import Firebase
+import AWSAppSync
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 class TestView: UIViewController {
 
 	@IBOutlet var tableView: UITableView!
 
-	private var listener: ListenerRegistration?
+	private var listener: Cancellable?
 
 	private var filter: [String] = ["Category1", "Category2", "Categroy3"]
 	private var categories: [String] = ["Category1", "Category2", "Categroy3"]
@@ -57,16 +57,28 @@ class TestView: UIViewController {
 	// MARK: - Backend methods (observer)
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	func createObserver() {
-
-		let query = Firestore.firestore().collection("Objects").whereField("category", in: filter)
-		listener = query.addSnapshotListener { querySnapshot, error in
-			if let snapshot = querySnapshot {
-				for documentChange in snapshot.documentChanges {
-					self.addObject(documentChange.document.data())
-				}
-				self.tableView.reloadData()
-			}
-		}
+    guard listener == nil else { return }
+    do {
+      listener = try appSyncClient.subscribe(subscription: ObjectsSubscriptionSubscription()) { result, transaction, error in
+        if let error = error {
+          NSLog(error.localizedDescription)
+        } else {
+          switch result {
+          case .some(let graphQLResult):
+            guard let response = graphQLResult.data?.objectsSubscription else { return }
+            NSLog(response.message)
+            if response.success {
+              self.fetchObjects()
+            }
+          default:
+            NSLog("No changes at all.")
+          }
+        }
+      }
+    } catch {
+      NSLog(error.localizedDescription)
+    }
+    fetchObjects()
 	}
 
 	//---------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,67 +95,113 @@ class TestView: UIViewController {
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	func removeObserver() {
 
-		listener?.remove()
+		listener?.cancel()
 		listener = nil
 	}
 
 	// MARK: - Backend methods (fetch)
 	//---------------------------------------------------------------------------------------------------------------------------------------------
-	func fetchObjects() {
-
-		let query = Firestore.firestore().collection("Objects").whereField("category", in: filter)
-		query.getDocuments() { querySnapshot, error in
-			if let snapshot = querySnapshot {
-				for documentChange in snapshot.documentChanges {
-					print(documentChange.document.data())
-				}
-			}
-		}
-	}
+  func fetchObjects() {
+    
+    let query = ObjectsByCategoriesQuery(category: filter)
+    
+    appSyncClient.fetch(query: query, cachePolicy: .fetchIgnoringCacheData) { result, error in
+      if let error = error {
+        NSLog(error.localizedDescription)
+      } else {
+        switch result {
+        case .some(let graphQLResult):
+          guard let objects = graphQLResult.data?.objectsByCategories else { return }
+          self.objectIds.removeAll()
+          self.objects.removeAll()
+          
+          let filterObjects = objects.filter { self.filter.contains(($0?.category)!) }
+          
+          for object in filterObjects {
+            if let object = object {
+              self.objects[object.objectId] = object.jsonObject
+              self.objectIds.append(object.objectId)
+            }
+          }
+          DispatchQueue.main.async {
+            self.tableView.reloadData()
+          }
+        default:
+          NSLog("No data returned.")
+        }
+      }
+    }
+  }
 
 	// MARK: - Backend methods (create, update)
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	func createObject(_ category: String) {
 
-		let objectId = UUID().uuidString
-
-		var object: [String: Any] = [:]
-
-		object["objectId"] = objectId
-		object["category"] = category
-
-		object["text"] = randomText()
-		object["number"] = randomInt()
-		object["boolean"] = randomBool()
-
-		object["createdAt"] = FieldValue.serverTimestamp()
-		object["updatedAt"] = FieldValue.serverTimestamp()
-
-		Firestore.firestore().collection("Objects").document(objectId).setData(object) { error in
-			if let error = error {
-				print(error.localizedDescription)
-			}
-		}
+    let insertObject = InsertObjectMutation(boolean: randomBool(),
+                                            category: category,
+                                            createdAt: Date().string(),
+                                            number: randomInt(),
+                                            objectId: UUID().uuidString,
+                                            text: randomText())
+    
+    
+    appSyncClient.perform(mutation: insertObject) { result, error in
+      if let error = error {
+        NSLog(error.localizedDescription)
+      } else  {
+        switch result {
+        case .some(let graphQLResult):
+          guard let message = graphQLResult.data?.insertObject.message else { return }
+          NSLog(message)
+        default:
+          NSLog("Data couldn't be inserted.")
+        }
+      }
+    }
 	}
 
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	func updateObject(_ object: [String: Any]) {
-
-		guard let objectId = object["objectId"] as? String else { return }
-
-		var object = object
-
-		object["text"] = randomText()
-		object["number"] = randomInt()
-		object["boolean"] = randomBool()
-
-		object["updatedAt"] = FieldValue.serverTimestamp()
-
-		Firestore.firestore().collection("Objects").document(objectId).updateData(object) { error in
-			if let error = error {
-				print(error.localizedDescription)
-			}
-		}
+    
+    guard
+      let objectId = object["objectId"] as? String,
+      let index = objectIds.firstIndex(of: objectId)
+      else { return }
+    
+    var object = object
+    
+    object["text"] = randomText()
+    object["number"] = randomInt()
+    object["boolean"] = randomBool()
+    object["updatedAt"] = Date().string()
+    
+    let updateObject = UpdateObjectMutation(boolean: object["boolean"] as! Bool,
+                                            number: object["number"] as! Int,
+                                            objectId: objectId,
+                                            text: object["text"] as! String,
+                                            updatedAt: object["updatedAt"] as! String)
+    
+    appSyncClient.perform(mutation: updateObject) { result, error in
+      if let error = error {
+        NSLog(error.localizedDescription)
+      } else {
+        switch result {
+        case .some(let graphQLResult):
+          guard
+            let updateObject = graphQLResult.data?.updateObject,
+            updateObject.success else { return }
+          self.objects[objectId] = object
+          DispatchQueue.main.async {
+            self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
+          }
+          NSLog(updateObject.message)
+        default:
+          NSLog("Data couldn't not be updated.")
+        }
+      }
+    }
+    
+    
 	}
 
 	// MARK: - User actions
@@ -273,4 +331,12 @@ extension TestView: UITableViewDelegate {
 			}
 		}
 	}
+}
+
+extension Date {
+  func string(format: String? = nil) -> String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = format ?? "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+    return formatter.string(from: self)
+  }
 }
