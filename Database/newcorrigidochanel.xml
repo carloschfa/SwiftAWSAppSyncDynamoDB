@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE tv SYSTEM "xmltv.dtd">
+
 <tv>
         <channel id="plugin://plugin.video.f4mTester/?url=http://bldtv.vip:80/carlos3969/101010/67188&amp;streamtype=TSDOWNLOADER&amp;name=">
           <display-name>"24HS APENAS UM SHOW</display-name>                  
